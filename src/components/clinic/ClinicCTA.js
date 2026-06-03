@@ -43,7 +43,7 @@ export default function ClinicCTA() {
 
           <div className="relative z-10 max-w-3xl mx-auto">
             <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-6 leading-tight">
-              Experience Comfortable Modern Dental Care
+              Experience Comfortable <span className="text-[#82C6FF]">Modern Dental Care</span>
             </h2>
             <p className="text-white/90 text-lg md:text-xl mb-12 font-medium max-w-2xl mx-auto">
               Book your appointment and discover the Dentelle difference. Our advanced clinic and expert team are ready to welcome you.

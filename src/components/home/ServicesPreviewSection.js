@@ -49,11 +49,11 @@ export default function ServicesPreviewSection() {
 
         {/* Right Side: Content */}
         <div>
-          <TextReveal 
-            as="h2" 
-            text="Redefining the Dental Experience"
-            className="font-serif text-4xl md:text-5xl font-semibold text-[#0B1220] dark:text-white leading-[1.2] mb-6"
-          />
+          <ScrollReveal direction="up" delay={0.1} distance={30}>
+            <h2 className="font-serif text-4xl md:text-5xl font-semibold text-[#0B1220] dark:text-white leading-[1.2] mb-6">
+              Redefining the <span className="text-[var(--color-primary)]">Dental Experience</span>
+            </h2>
+          </ScrollReveal>
           
           <TextReveal 
             as="p" 

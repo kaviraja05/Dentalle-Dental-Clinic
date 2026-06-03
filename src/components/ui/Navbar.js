@@ -6,14 +6,14 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Moon, Sun } from "lucide-react";
+import { Menu, X, Moon, Sun, ArrowUpRight } from "lucide-react";
 
 const links = [
   { name: "Home", href: "/" },
-  { name: "About", href: "/about" },
+  { name: "About us", href: "/about" },
   { name: "Services", href: "/services" },
-  { name: "Our Clinic", href: "/clinic" },
-  { name: "Contact", href: "/contact" },
+  { name: "Gallery", href: "/clinic" },
+  { name: "Contact us", href: "/contact" },
 ];
 
 export default function Navbar() {
@@ -24,7 +24,7 @@ export default function Navbar() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line
     setMounted(true);
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
@@ -34,9 +34,6 @@ export default function Navbar() {
   }, []);
 
   const currentTheme = theme === "system" ? systemTheme : theme;
-  const isAboutPage = pathname === "/about";
-  const isServicesPage = pathname === "/services";
-  const isTransparentOnDark = (isAboutPage || isServicesPage) && !scrolled;
 
   const toggleTheme = () => {
     setTheme(currentTheme === "dark" ? "light" : "dark");
@@ -44,17 +41,14 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled
-        ? "bg-white/70 dark:bg-black/70 backdrop-blur-xl border-b border-white/20 dark:border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.1)] py-2"
-        : "bg-transparent py-4"
-        }`}
+      className="fixed top-4 md:top-6 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none transition-all duration-300"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-
+      <div className={`pointer-events-auto w-full max-w-7xl backdrop-blur-xl border border-gray-200/50 dark:border-gray-800/50 rounded-full px-4 sm:px-6 py-2 md:py-3 flex items-center justify-between shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-300 ${scrolled ? 'bg-white/95 dark:bg-black/95 shadow-lg' : 'bg-white/80 dark:bg-black/80'}`}>
+        
         {/* Left: Logo */}
         <div className="flex-shrink-0 lg:flex-1 flex justify-start">
-          <Link href="/" className="flex items-center space-x-3 z-50">
-            <div className={`relative w-8 h-8 md:w-10 md:h-10 transition-all duration-300 ${isTransparentOnDark ? 'brightness-0 invert' : ''}`}>
+          <Link href="/" className="flex items-center space-x-2 md:space-x-3 z-50">
+            <div className={`relative w-7 h-7 md:w-9 md:h-9 transition-all duration-300`}>
               <Image
                 src="/images/logo/logo.png"
                 alt="Dentelle Logo"
@@ -63,30 +57,27 @@ export default function Navbar() {
                 unoptimized
               />
             </div>
-            <span className={`font-serif text-xl md:text-2xl font-semibold tracking-wider transition-colors duration-300 ${isTransparentOnDark ? 'text-white' : 'text-[var(--color-text-heading)]'}`}>
+            <span className="font-serif text-lg md:text-xl font-semibold tracking-wider text-[#111827] dark:text-white">
               DENTELLE
             </span>
           </Link>
         </div>
 
         {/* Center: Desktop Nav Links */}
-        <nav className="hidden lg:flex flex-1 justify-center items-center space-x-8">
+        <nav className="hidden lg:flex flex-1 justify-center items-center space-x-1 lg:space-x-4">
           {links.map((link) => {
             const isActive = pathname === link.href;
             return (
               <Link
                 key={link.name}
                 href={link.href}
-                className={`relative text-sm font-medium transition-colors hover:text-[var(--color-primary)] ${isActive ? "text-[var(--color-primary)]" : isTransparentOnDark ? "text-white/90 hover:text-white" : "text-[var(--color-text-heading)]"
-                  }`}
+                className={`relative px-4 py-2 text-[15px] font-medium transition-colors rounded-full whitespace-nowrap hover:text-[var(--color-primary)] ${
+                  isActive 
+                    ? "text-[var(--color-primary)] bg-[var(--color-primary)]/10" 
+                    : "text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+                }`}
               >
                 {link.name}
-                {isActive && (
-                  <motion.div
-                    layoutId="navbar-indicator"
-                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-[var(--color-primary)]"
-                  />
-                )}
               </Link>
             );
           })}
@@ -94,37 +85,44 @@ export default function Navbar() {
 
         {/* Right: Actions */}
         <div className="hidden lg:flex lg:flex-1 justify-end items-center space-x-4">
-          {/* Explicit Dark Mode Toggle */}
+          {/* Theme Toggle */}
           {mounted && (
             <button
               onClick={toggleTheme}
-              className={`p-2 rounded-full transition-colors ${isTransparentOnDark ? 'bg-white/10 text-white hover:bg-white/20' : 'bg-[var(--color-bg-secondary)] text-[var(--color-text-heading)] hover:bg-[var(--color-border-color)]'}`}
+              className="p-2.5 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors shadow-sm"
               aria-label="Toggle Dark Mode"
             >
               {currentTheme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
             </button>
           )}
 
-          <Link href="/contact" className="btn-primary text-sm px-6 py-2.5">
-            Book Appointment
+          {/* CTA Button */}
+          <Link 
+            href="/contact" 
+            className="group flex items-center bg-[#111827] dark:bg-white text-white dark:text-[#111827] rounded-full pl-6 pr-2 py-2 transition-transform hover:scale-105"
+          >
+            <span className="text-sm font-semibold mr-3">Get Started</span>
+            <div className="w-8 h-8 rounded-full bg-white/20 dark:bg-black/10 flex items-center justify-center group-hover:bg-white/30 dark:group-hover:bg-black/20 transition-colors overflow-hidden">
+              <ArrowUpRight size={16} className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+            </div>
           </Link>
         </div>
 
         {/* Mobile Menu Toggle */}
-        <div className="lg:hidden flex items-center space-x-4 z-50">
+        <div className="lg:hidden flex items-center space-x-2">
           {mounted && (
             <button
               onClick={toggleTheme}
-              className={`p-2 rounded-full ${isTransparentOnDark ? 'bg-white/10 text-white' : 'bg-[var(--color-bg-secondary)] text-[var(--color-text-heading)]'}`}
+              className="p-2.5 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-200"
             >
               {currentTheme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
             </button>
           )}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className={`focus:outline-none ${isTransparentOnDark && !isOpen ? 'text-white' : 'text-[var(--color-text-heading)]'}`}
+            className="p-2.5 rounded-full text-gray-700 dark:text-gray-200 focus:outline-none bg-gray-100 dark:bg-gray-800"
           >
-            {isOpen ? <X size={28} /> : <Menu size={28} />}
+            {isOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
         </div>
       </div>
@@ -133,33 +131,35 @@ export default function Navbar() {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ x: "100%" }}
-            animate={{ x: 0 }}
-            exit={{ x: "100%" }}
-            transition={{ type: "tween", duration: 0.3 }}
-            className="fixed inset-y-0 right-0 w-64 bg-[var(--color-bg-card)] shadow-2xl z-40 flex flex-col pt-24 px-6 lg:hidden"
+            initial={{ opacity: 0, y: -20, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -10, scale: 0.95 }}
+            transition={{ type: "spring", duration: 0.4 }}
+            className="absolute top-20 left-4 right-4 bg-white/95 dark:bg-[#1A1A1A]/95 backdrop-blur-xl border border-gray-200/50 dark:border-gray-800/50 rounded-3xl shadow-2xl z-40 flex flex-col p-6 pointer-events-auto lg:hidden"
           >
-            <nav className="flex flex-col space-y-6">
+            <nav className="flex flex-col space-y-2">
               {links.map((link) => (
                 <Link
                   key={link.name}
                   href={link.href}
                   onClick={() => setIsOpen(false)}
-                  className={`text-lg font-medium ${pathname === link.href
-                    ? "text-[var(--color-primary)]"
-                    : "text-[var(--color-text-heading)]"
-                    }`}
+                  className={`text-lg font-medium px-4 py-3 rounded-2xl transition-colors ${
+                    pathname === link.href
+                      ? "bg-[var(--color-primary)]/10 text-[var(--color-primary)]"
+                      : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+                  }`}
                 >
                   {link.name}
                 </Link>
               ))}
-              <div className="pt-4 border-t border-[var(--color-border-color)]">
+              <div className="pt-4 mt-2 border-t border-gray-100 dark:border-gray-800">
                 <Link
                   href="/contact"
                   onClick={() => setIsOpen(false)}
-                  className="btn-primary block text-center w-full"
+                  className="flex items-center justify-center w-full bg-[#111827] dark:bg-white text-white dark:text-[#111827] rounded-full py-4 shadow-md active:scale-95 transition-transform group"
                 >
-                  Book Appointment
+                  <span className="font-semibold mr-2">Get Started</span>
+                  <ArrowUpRight size={18} className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
                 </Link>
               </div>
             </nav>
@@ -169,3 +169,4 @@ export default function Navbar() {
     </header>
   );
 }
+

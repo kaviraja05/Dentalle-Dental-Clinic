@@ -3,7 +3,6 @@ import AboutMission from "@/components/about/AboutMission";
 import AboutValues from "@/components/about/AboutValues";
 import AboutCareRoutine from "@/components/about/AboutCareRoutine";
 import AboutTeam from "@/components/about/AboutTeam";
-import AboutCTA from "@/components/about/AboutCTA";
 
 export default function AboutPage() {
   return (
@@ -13,7 +12,6 @@ export default function AboutPage() {
       <AboutValues />
       <AboutCareRoutine />
       <AboutTeam />
-      <AboutCTA />
     </div>
   );
 }

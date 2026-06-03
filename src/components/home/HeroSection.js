@@ -43,7 +43,7 @@ export default function HeroSection() {
             }}
             className="font-serif text-4xl md:text-4xl lg:text-6xl font-semibold text-[#111827] dark:text-white leading-[1.2] mb-4 lg:mb-6"
           >
-            Helping People Lead Healthy & Happy Lives
+            Helping People Lead <span className="text-[var(--color-primary)]">Healthy & Happy</span> Lives
           </motion.h1>
 
           <motion.p

@@ -61,12 +61,11 @@ export default function AboutPreviewSection() {
             </div>
           </ScrollReveal>
 
-          <TextReveal
-            as="h2"
-            text="Your Smile & Happiness Is Our Mission"
-            className="font-serif text-3xl md:text-4xl lg:text-5xl font-semibold text-[#0B1220] dark:text-white leading-[1.15] mb-6"
-            delay={0.2}
-          />
+          <ScrollReveal direction="up" delay={0.2} distance={30}>
+            <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-semibold text-[#0B1220] dark:text-white leading-[1.15] mb-6">
+              Your Smile & Happiness <span className="text-[var(--color-primary)]">Is Our Mission</span>
+            </h2>
+          </ScrollReveal>
 
           <TextReveal
             as="p"

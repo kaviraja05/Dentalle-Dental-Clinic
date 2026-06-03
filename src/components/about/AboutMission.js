@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { useInView } from "react-intersection-observer";
 
 export default function AboutMission() {
@@ -38,7 +38,7 @@ export default function AboutMission() {
           className="mb-12 md:mb-16 max-w-4xl"
         >
           <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-semibold text-[#0B1220] dark:text-white leading-[1.2]">
-            Our Promise, Where Compassion <br className="hidden md:block"/> Meets Expertise
+            Our Promise, Where Compassion <br className="hidden md:block"/> <span className="text-[var(--color-primary)]">Meets Expertise</span>
           </h2>
         </motion.div>
 
@@ -78,11 +78,7 @@ export default function AboutMission() {
                 <div key={idx} className="flex items-start gap-4">
                   {/* Custom Asterisk Icon */}
                   <div className="mt-1 flex-shrink-0 text-[var(--color-primary)]">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                      <line x1="12" y1="3" x2="12" y2="21"></line>
-                      <line x1="4.22" y1="7.78" x2="19.78" y2="16.22"></line>
-                      <line x1="4.22" y1="16.22" x2="19.78" y2="7.78"></line>
-                    </svg>
+                    <CheckCircle2 size={20} strokeWidth={2.5} />
                   </div>
                   <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
                     <span className="font-semibold text-gray-800 dark:text-gray-200">{bullet.title}</span> {bullet.desc}

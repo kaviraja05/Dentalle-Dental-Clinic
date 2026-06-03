@@ -52,7 +52,7 @@ export default function ClinicIntro() {
               </div>
               
               <h2 className="font-serif text-4xl md:text-5xl font-semibold text-[#0B1220] dark:text-white leading-[1.2] mb-6">
-                Our Facility
+                Our <span className="text-[#4DA6FF]">Facility</span>
               </h2>
               
               <p className="text-gray-600 dark:text-gray-400 mb-8 leading-relaxed text-lg">

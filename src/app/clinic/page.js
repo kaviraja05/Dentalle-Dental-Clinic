@@ -22,7 +22,7 @@ export default function ClinicPage() {
       <ClinicTech />
       <ClinicSafety />
       {/* <ClinicJourney /> */}
-      <ClinicStats />
+      {/* <ClinicStats /> */}
       <ClinicTour />
       <ClinicCTA />
     </main>

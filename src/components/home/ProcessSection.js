@@ -49,12 +49,11 @@ export default function ProcessSection() {
               Our Working Process
             </div>
           </ScrollReveal>
-          <TextReveal 
-            as="h2" 
-            text="How We Work"
-            className="font-serif text-4xl md:text-5xl font-semibold text-[#0B1220] dark:text-white flex justify-center"
-            delay={0.2}
-          />
+          <ScrollReveal direction="up" delay={0.2} distance={30} className="flex justify-center">
+            <h2 className="font-serif text-4xl md:text-5xl font-semibold text-[#0B1220] dark:text-white">
+              How We <span className="text-[var(--color-primary)]">Work</span>
+            </h2>
+          </ScrollReveal>
         </div>
 
         {/* Process Steps */}

@@ -43,7 +43,7 @@ export default function AboutCTA() {
             {/* Text */}
             <div>
               <div className="text-white text-lg md:text-xl font-medium mb-1">
-                Available 24/7
+                Available <span className="text-[#0B1220] dark:text-[#0B1220]">24/7</span>
               </div>
               <a href="tel:2085550112" className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-white hover:text-[#D3EFFF] transition-colors whitespace-nowrap">
                 (208) 555-0112

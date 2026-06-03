@@ -55,7 +55,7 @@ export default function ServicesFAQ() {
               Support
             </div>
             <h2 className="font-serif text-4xl md:text-5xl font-semibold text-[#0B1220] dark:text-white leading-[1.2] mb-6">
-              Frequently Asked Questions
+              Frequently Asked <span className="text-[#4DA6FF]">Questions</span>
             </h2>
             <p className="text-gray-600 dark:text-gray-400">
               Have questions about our services or treatments? Find your answers here or reach out to our team directly!

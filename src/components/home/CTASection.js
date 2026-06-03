@@ -23,7 +23,7 @@ export default function CTASection() {
           {/* Content */}
           <div className="relative z-10 p-10 md:p-20 w-full md:w-3/5 text-left">
             <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-6 leading-tight">
-             <span className="text-white">Ready for Your Best Smile?</span>
+             <span className="text-[#4DA6FF]">Ready for Your Best Smile?</span>
             </h2>
             <p className="text-white/90 text-lg md:text-xl mb-10 max-w-xl font-medium">
               Book your consultation today and take the first step towards a healthier, more confident you with our expert team.

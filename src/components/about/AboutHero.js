@@ -28,9 +28,9 @@ export default function AboutHero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="font-serif text-4xl md:text-5xl lg:text-7xl font-semibold !text-white leading-tight mb-6"
+          className="font-serif text-4xl md:text-5xl lg:text-7xl font-medium !text-white leading-tight mb-6"
         >
-          Where Your Smile is <br className="hidden md:block" /> Our Masterpiece
+          Where Your Smile is <br className="hidden md:block" /> Our <span className="text-[var(--color-primary)]">Masterpiece</span>
         </motion.h1>
         
         <motion.p 

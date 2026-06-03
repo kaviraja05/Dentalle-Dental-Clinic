@@ -62,7 +62,7 @@ export default function AboutTeam() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="font-serif text-4xl md:text-5xl font-semibold text-[#0B1220] dark:text-white"
           >
-            Meet Our Specialists
+            Meet Our <span className="text-[var(--color-primary)]">Specialists</span>
           </motion.h2>
         </div>
 

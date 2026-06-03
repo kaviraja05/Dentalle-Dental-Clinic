@@ -45,7 +45,7 @@ export default function AboutValues() {
             transition={{ duration: 0.6 }}
             className="font-serif text-4xl md:text-5xl font-semibold text-[#0B1220] dark:text-white leading-[1.2] mb-6"
           >
-            The Guiding Principles Behind Every Smile We Create
+            The Guiding Principles Behind <span className="text-[var(--color-primary)]">Every Smile</span> We Create
           </motion.h2>
           <motion.p 
             initial={{ opacity: 0, y: 30 }}

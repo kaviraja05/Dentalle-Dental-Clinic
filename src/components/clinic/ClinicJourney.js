@@ -13,7 +13,7 @@ export default function ClinicJourney() {
   const features = [
     {
       title: "Friendly Staff",
-      desc: "From the moment you walk in, our warm reception team is dedicated to making you feel completely at home.",
+      desc: "Your journey to a beautiful smile begins the moment you walk through our doors. We&apos;ve designed every step of your experience to be comfortable, transparent, and completely centered around your needs.",
       icon: Smile
     },
     {
@@ -51,7 +51,7 @@ export default function ClinicJourney() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-gray-600 dark:text-gray-400 text-lg max-w-2xl mx-auto"
           >
-            We've reimagined the traditional dental visit to create a patient journey that feels less like a clinic and more like a luxury spa experience.
+            We&apos;ve reimagined the traditional dental visit to create a patient journey that feels less like a clinic and more like a luxury spa experience.
           </motion.p>
         </div>
 

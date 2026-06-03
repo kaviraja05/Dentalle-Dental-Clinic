@@ -55,7 +55,7 @@ export default function ClinicSafety() {
             className="w-full lg:w-1/2"
           >
             <h2 className="font-serif text-4xl md:text-5xl font-semibold text-[#0B1220] dark:text-white leading-[1.2] mb-6">
-              Committed to Hygiene & Safety
+              Committed to <span className="text-[#4DA6FF]">Hygiene & Safety</span>
             </h2>
 
 

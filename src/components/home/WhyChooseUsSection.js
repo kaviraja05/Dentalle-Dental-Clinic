@@ -46,7 +46,7 @@ export default function WhyChooseUsSection() {
     <section className="bg-[var(--color-bg-secondary)]">
       <div className="section-container">
         <div className="text-center mb-16">
-          <h2 className="heading-secondary">Why Choose Dentelle</h2>
+          <h2 className="heading-secondary">Why Choose <span className="text-[var(--color-primary)]">Dentelle</span></h2>
           <p className="text-sub mx-auto">
             Experience world-class dental care with a focus on your comfort and long-term oral health.
           </p>

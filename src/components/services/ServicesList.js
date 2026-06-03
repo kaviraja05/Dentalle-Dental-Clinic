@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useInView } from "react-intersection-observer";
+import { CheckCircle2 } from "lucide-react";
 
 export default function ServicesList() {
   const [ref, inView] = useInView({
@@ -70,11 +71,9 @@ export default function ServicesList() {
     }
   ];
 
-  // Custom Sunburst/Asterisk Icon for bullets
+  // Custom Bullet Icon
   const BulletIcon = () => (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-gray-700 dark:text-gray-300 mt-0.5 shrink-0">
-      <path d="M12 2v20M17 5l-10 14M22 12H2M19 19L5 5" />
-    </svg>
+    <CheckCircle2 size={18} className="text-[var(--color-primary)] mt-0.5 shrink-0" strokeWidth={2.5} />
   );
 
   return (

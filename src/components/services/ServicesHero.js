@@ -23,7 +23,7 @@ export default function ServicesHero() {
           transition={{ duration: 0.8 }}
           className="font-serif text-5xl md:text-6xl lg:text-7xl font-semibold !text-white leading-tight mb-6 drop-shadow-lg"
         >
-          Exceptional Care for <br className="hidden md:block" /> Every Smile
+          Exceptional Care for <br className="hidden md:block" /> <span className="text-[var(--color-primary)]">Every Smile</span>
         </motion.h1>
         
         <motion.p 

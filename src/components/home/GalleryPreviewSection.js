@@ -18,7 +18,7 @@ export default function GalleryPreviewSection() {
       <div className="section-container">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
           <div className="max-w-2xl">
-            <h2 className="heading-secondary">Experience Dentelle</h2>
+            <h2 className="heading-secondary">Experience <span className="text-[var(--color-primary)]">Dentelle</span></h2>
             <p className="text-[var(--color-text-body)] text-lg">
               Take a tour of our luxurious, state-of-the-art dental clinic.
             </p>

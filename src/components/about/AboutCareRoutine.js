@@ -64,7 +64,7 @@ export default function AboutCareRoutine() {
             Dental Education
           </div>
           <h2 className="font-serif text-4xl md:text-5xl font-semibold text-[#0B1220] dark:text-white leading-[1.2]">
-            Proper Brushing Technique
+            Proper Brushing <span className="text-[var(--color-primary)]">Technique</span>
           </h2>
         </div>
 
@@ -88,18 +88,12 @@ export default function AboutCareRoutine() {
             />
           </motion.div>
 
-          {/* Right Side: Automatically Scrolling Steps on Desktop, Manual on Mobile */}
-          <div className="relative h-[400px] lg:h-[550px] overflow-hidden rounded-2xl mask-image-vertical">
-            <motion.div
-              animate={isDesktop ? { y: [0, -1000] } : { y: 0 }}
-              transition={isDesktop ? {
-                repeat: Infinity,
-                ease: "linear",
-                duration: 20,
-              } : {}}
-              className={`flex flex-col gap-6 pb-6 h-full ${!isDesktop ? "overflow-y-auto pr-2" : ""}`}
+          {/* Right Side: Scrollable Steps */}
+          <div className="relative h-[400px] lg:h-[550px] rounded-2xl overflow-hidden">
+            <div
+              className="flex flex-col gap-6 pb-6 h-full overflow-y-auto pr-2"
             >
-              {(isDesktop ? [...steps, ...steps] : steps).map((step, idx) => (
+              {steps.map((step, idx) => (
                 <div 
                   key={idx} 
                   className="bg-white dark:bg-[var(--color-bg-card)] border border-gray-200 dark:border-gray-800 rounded-2xl p-6 flex items-start gap-6 shadow-sm hover:shadow-md transition-shadow shrink-0"
@@ -117,7 +111,7 @@ export default function AboutCareRoutine() {
                   </div>
                 </div>
               ))}
-            </motion.div>
+            </div>
           </div>
 
         </div>

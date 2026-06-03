@@ -4,7 +4,6 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import Navbar from "@/components/ui/Navbar";
 import Footer from "@/components/ui/Footer";
 import Loader from "@/components/ui/Loader";
-import CustomCursor from "@/components/ui/CustomCursor";
 
 const playfair = Playfair_Display({
   variable: "--font-serif",
@@ -27,8 +26,7 @@ export default function RootLayout({ children }) {
       <body
         className={`${playfair.variable} ${inter.variable} antialiased selection:bg-[var(--color-primary)] selection:text-white`}
       >
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <CustomCursor />
+        <ThemeProvider attribute="class" defaultTheme="light">
           <Loader />
           <Navbar />
           <main className="min-h-screen pt-[72px]">

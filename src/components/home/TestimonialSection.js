@@ -62,12 +62,11 @@ export default function TestimonialSection() {
               Client Reviews
             </div>
           </ScrollReveal>
-          <TextReveal 
-            as="h2" 
-            text="What Our Patients Say"
-            className="font-serif text-4xl md:text-5xl font-semibold text-[#0B1220] dark:text-white flex justify-center"
-            delay={0.2}
-          />
+          <ScrollReveal direction="up" delay={0.2} distance={30} className="flex justify-center">
+            <h2 className="font-serif text-4xl md:text-5xl font-semibold text-[#0B1220] dark:text-white">
+              What <span className="text-[var(--color-primary)]">Our Patients</span> Say
+            </h2>
+          </ScrollReveal>
         </div>
 
         {/* Testimonials Horizontal Scrolling Grid */}

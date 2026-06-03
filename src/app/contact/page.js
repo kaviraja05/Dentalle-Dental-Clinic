@@ -1,26 +1,55 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useRef, useState } from "react";
-import Image from "next/image";
+import { useRef, useState, useEffect } from "react";
+import { Phone, MessageCircle, Mail, Clock, MapPin, ArrowUpRight } from "lucide-react";
+
+const TypingMessage = () => {
+  const [text, setText] = useState("");
+  const fullText = "Committed to Your Care, 24 Hours a Day";
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    let timer;
+    if (isDeleting) {
+      if (text === "") {
+        setIsDeleting(false);
+        timer = setTimeout(() => {}, 500);
+      } else {
+        timer = setTimeout(() => setText(fullText.substring(0, text.length - 1)), 50);
+      }
+    } else {
+      if (text === fullText) {
+        timer = setTimeout(() => setIsDeleting(true), 2500);
+      } else {
+        timer = setTimeout(() => setText(fullText.substring(0, text.length + 1)), 60);
+      }
+    }
+    return () => clearTimeout(timer);
+  }, [text, isDeleting, fullText]);
+
+  return (
+    <div className="relative bg-[#F8FCFF] dark:bg-[#111827] text-gray-900 dark:text-white px-4 py-3 rounded-2xl rounded-tl-sm text-[15px] font-medium border border-gray-200 dark:border-gray-800 shadow-sm w-fit max-w-full">
+      <span className="italic">{text}</span>
+      <span className="animate-pulse ml-0.5 inline-block w-[2px] h-[15px] bg-[var(--color-primary)] dark:bg-white align-middle"></span>
+    </div>
+  );
+};
 
 export default function ContactPage() {
   const formSectionRef = useRef(null);
-
   const [result, setResult] = useState("");
   const [loading, setLoading] = useState(false);
-
 
   const scrollToForm = () => {
     formSectionRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  // Text animation variant
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.05 } // Faster for better word-by-word effect
+      transition: { staggerChildren: 0.1 }
     }
   };
 
@@ -29,21 +58,13 @@ export default function ContactPage() {
     visible: { opacity: 1, y: 0 }
   };
 
-  const titleText = "We’re Here to Help You Smile".split(" ");
-  const bodyText = "Your smile is more than just a feature—it’s a reflection of your confidence, comfort, and well-being. We’re committed to making every visit a positive step toward a brighter smile.".split(" ");
-
   const onSubmit = async (event) => {
     event.preventDefault();
-
     setLoading(true);
     setResult("Sending message...");
 
     const formData = new FormData(event.target);
-
-    formData.append(
-      "access_key",
-      "6ef2494d-f2e3-49ec-b4ef-fd621bbd1d31"
-    );
+    formData.append("access_key", "6ef2494d-f2e3-49ec-b4ef-fd621bbd1d31");
 
     const object = Object.fromEntries(formData);
     const json = JSON.stringify(object);
@@ -69,194 +90,230 @@ export default function ContactPage() {
     } catch (error) {
       setResult("❌ Something went wrong.");
     }
-
     setLoading(false);
   };
+
   return (
     <div className="bg-[var(--color-bg-main)] min-h-screen">
+      
       {/* 1. Top Section / Hero */}
-      <section className="relative min-h-[75vh] flex items-center justify-center overflow-hidden bg-[var(--color-bg-secondary)]">
-
-        <div className="absolute inset-0 max-w-7xl mx-auto w-full pointer-events-none">
-          {/* Left Side Image Container */}
-          <motion.div
-            animate={{ y: [-10, 10, -10], rotate: [-6, -10, -6] }}
-            transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
-            className="hidden md:block absolute -left-4 md:left-0 lg:left-8 xl:left-12 top-1/2 -translate-y-1/2 w-32 h-48 md:w-36 md:h-52 lg:w-56 lg:h-72 rounded-2xl overflow-hidden opacity-30 md:opacity-30 lg:opacity-80 shadow-xl pointer-events-none lg:pointer-events-auto"
-          >
-            {/* using standard img to prevent next/image 404 console errors if not uploaded yet */}
-            <img
-              src="/images/contact/hero-left.jpg"
-              alt="Left decoration"
-              className="w-full h-full object-cover"
-            />
-          </motion.div>
-
-          {/* Right Side Image Container */}
-          <motion.div
-            animate={{ y: [10, -10, 10], rotate: [6, 10, 6] }}
-            transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
-            className="hidden md:block absolute -right-4 md:right-0 lg:right-8 xl:right-12 top-1/2 -translate-y-1/2 w-32 h-48 md:w-36 md:h-52 lg:w-56 lg:h-72 rounded-2xl overflow-hidden opacity-30 md:opacity-30 lg:opacity-80 shadow-xl pointer-events-none lg:pointer-events-auto"
-          >
-            <img
-              src="/images/contact/hero-right.jpg"
-              alt="Right decoration"
-              className="w-full h-full object-cover"
-            />
-          </motion.div>
+      <section className="relative min-h-[60vh] md:min-h-[70vh] flex items-center overflow-hidden bg-white dark:bg-[var(--color-bg-main)]">
+        {/* Background Image Container covering 3/4 of the right side */}
+        <div className="absolute top-0 right-0 bottom-0 w-full md:w-full z-0">
+          <img 
+            src="/images/clinic/tech-bg.jpg" 
+            alt="Clinic Background" 
+            className="w-full h-full object-cover object-center"
+          />
         </div>
+        
+        {/* Gradient Overlay for Left Content */}
+        <div className="absolute inset-0 z-10 bg-gradient-to-r from-white via-white/75 to-transparent dark:from-[var(--color-bg-main)] dark:via-[var(--color-bg-main)]/95 dark:to-transparent w-full md:w-[70%]"></div>
+        <div className="absolute inset-0 z-10 bg-white/60 dark:bg-black/60 md:hidden"></div>
 
-        <div className="relative z-10 text-center max-w-2xl px-6">
-          <motion.h1
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-            className="heading-primary font-semibold mb-6"
-          >
-            {titleText.map((word, index) => (
-              <motion.span key={index} variants={textVariants} className="inline-block mr-2">
-                {word}
-              </motion.span>
-            ))}
-          </motion.h1>
-
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-            className="text-sub mx-auto mb-10"
-          >
-            {bodyText.map((word, index) => (
-              <motion.span key={index} variants={textVariants} className="inline-block mr-1">
-                {word}
-              </motion.span>
-            ))}
-          </motion.div>
-
-          <motion.button
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1 }}
-            onClick={scrollToForm}
-            className="btn-primary"
-          >
-            Book a call
-          </motion.button>
+        <div className="relative z-20 max-w-7xl mx-auto px-6 lg:px-8 w-full pt-20">
+          <div className="max-w-2xl">
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+            >
+              <motion.div variants={textVariants} className="text-[var(--color-primary)] font-bold tracking-widest text-sm md:text-base uppercase mb-4 flex items-center gap-2">
+                CONTACT US
+              </motion.div>
+              <motion.h1
+                variants={textVariants}
+                className="font-serif text-4xl md:text-5xl lg:text-[48px] font-semibold text-[#0B1220] dark:text-white leading-[1.15] mb-6"
+              >
+                We Provide Professional Dental Care, <span className="text-[var(--color-primary)]">Surgery and Aesthetics</span> for Modern Families.
+              </motion.h1>
+            </motion.div>
+          </div>
         </div>
       </section>
 
       {/* 2. Contact Cards & Form Layout */}
-      <section ref={formSectionRef} className="py-12 bg-[var(--color-bg-secondary)]">
-        <div className="section-container max-w-5xl mx-auto">
+      <section ref={formSectionRef} className="py-16 md:py-24 bg-[#F8FCFF] dark:bg-[var(--color-bg-secondary)]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          {/* Main Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+            
+            {/* Left Column: Info Cards & Map */}
+            <div className="lg:col-span-6 flex flex-col gap-6">
+              
+              {/* 4 Info Cards Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
+                
+                {/* Call Us */}
+                <div className="bg-white dark:bg-[var(--color-bg-card)] p-6 rounded-3xl border border-gray-100 dark:border-gray-800 shadow-sm flex items-center gap-5 hover:shadow-md transition-shadow group">
+                  <div className="w-12 h-12 rounded-full bg-[#F0F7FF] dark:bg-[var(--color-primary)]/10 text-[var(--color-primary)] flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                    <Phone size={22} />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-gray-900 dark:text-white text-base">Call Us</h4>
+                    <p className="text-gray-500 dark:text-gray-400 text-sm mt-0.5">+91 95744 68870</p>
+                  </div>
+                </div>
 
-          {/* Top 3 Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-5">
-            <div className="bg-white dark:bg-[var(--color-bg-card)] p-8 rounded-3xl border border-[var(--color-border-color)] shadow-sm">
-              <h3 className="font-serif text-2xl text-[var(--color-text-heading)] font-semibold mb-2">Email</h3>
-              <p className="text-[var(--color-text-body)]">uiuxocean@gmail.com</p>
-            </div>
-            <div className="bg-white dark:bg-[var(--color-bg-card)] p-8 rounded-3xl border border-[var(--color-border-color)] shadow-sm">
-              <h3 className="font-serif text-2xl text-[var(--color-text-heading)] font-semibold mb-2">Phone</h3>
-              <p className="text-[var(--color-text-body)]">+91 95744 68870</p>
-            </div>
-            <div className="bg-white dark:bg-[var(--color-bg-card)] p-8 rounded-3xl border border-[var(--color-border-color)] shadow-sm">
-              <h3 className="font-serif text-2xl text-[var(--color-text-heading)] font-semibold mb-2">Address</h3>
-              <p className="text-[var(--color-text-body)]">Ahmedabad, India</p>
-            </div>
-          </div>
+                {/* WhatsApp */}
+                <div className="bg-white dark:bg-[var(--color-bg-card)] p-6 rounded-3xl border border-gray-100 dark:border-gray-800 shadow-sm flex items-center gap-5 hover:shadow-md transition-shadow group">
+                  <div className="w-12 h-12 rounded-full bg-[#E8F8EE] dark:bg-[#25D366]/10 text-[#25D366] flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                    <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+                      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.888-.788-1.489-1.761-1.663-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-gray-900 dark:text-white text-base">WhatsApp</h4>
+                    <p className="text-gray-500 dark:text-gray-400 text-sm mt-0.5">+91 95744 68870</p>
+                  </div>
+                </div>
 
-          {/* Two-Sided Section with blue border and single screen alignment */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 bg-white dark:bg-[var(--color-bg-card)] rounded-[2rem] border-2 border-blue-200 dark:border-[var(--color-primary)]/30 overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.2)] max-w-5xl mx-auto">
+                {/* Email */}
+                <div className="bg-white dark:bg-[var(--color-bg-card)] p-6 rounded-3xl border border-gray-100 dark:border-gray-800 shadow-sm flex items-center gap-5 hover:shadow-md transition-shadow group">
+                  <div className="w-12 h-12 rounded-full bg-[#FFF4ED] dark:bg-[#FF8A4C]/10 text-[#FF8A4C] flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                    <Mail size={22} />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-gray-900 dark:text-white text-base">Email</h4>
+                    <p className="text-gray-500 dark:text-gray-400 text-sm mt-0.5">hello@dentelle.com</p>
+                  </div>
+                </div>
 
-            {/* Left: Business Hours */}
-            <div className="p-6 md:p-8 lg:p-10 lg:pr-12 border-b lg:border-b-0 lg:border-r border-[var(--color-border-color)]">
-              <h3 className="font-serif text-2xl font-semibold text-[var(--color-text-heading)] mb-2">Business Hours</h3>
-              <p className="text-[var(--color-text-body)] text-sm mb-6">Book your Appointment Today</p>
+                {/* Business Hours */}
+                <div className="bg-white dark:bg-[var(--color-bg-card)] p-6 rounded-3xl border border-gray-100 dark:border-gray-800 shadow-sm flex items-center gap-5 hover:shadow-md transition-shadow group">
+                  <div className="w-12 h-12 rounded-full bg-[#F4F0FF] dark:bg-[#9D71FD]/10 text-[#9D71FD] flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                    <Clock size={22} />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-gray-900 dark:text-white text-base">Business Hours</h4>
+                    <p className="text-gray-500 dark:text-gray-400 text-sm mt-0.5">09:00 AM - 07:00 PM</p>
+                  </div>
+                </div>
 
-              <div className="space-y-4">
-                {/* Mon */}
-                <div className="flex justify-between items-center border-b border-[var(--color-border-color)] pb-2">
-                  <span className="font-medium text-[var(--color-text-heading)] text-sm">Monday</span>
-                  <span className="text-[var(--color-text-body)] text-sm">10:00 AM - 07:00 PM</span>
-                </div>
-                {/* Tue */}
-                <div className="flex justify-between items-center border-b border-[var(--color-border-color)] pb-2">
-                  <span className="font-medium text-[var(--color-text-heading)] text-sm">Tuesday</span>
-                  <span className="text-[var(--color-text-body)] text-sm">10:00 AM - 07:00 PM</span>
-                </div>
-                {/* Wed */}
-                <div className="flex justify-between items-center border-b border-[var(--color-border-color)] pb-2">
-                  <span className="font-medium text-[var(--color-text-heading)] text-sm">Wednesday</span>
-                  <span className="text-[var(--color-text-body)] text-sm">10:00 AM - 07:00 PM</span>
-                </div>
-                {/* Thu */}
-                <div className="flex justify-between items-center border-b border-[var(--color-border-color)] pb-2">
-                  <span className="font-medium text-[var(--color-text-heading)] text-sm">Thursday</span>
-                  <span className="text-[var(--color-text-body)] text-sm">10:00 AM - 07:00 PM</span>
-                </div>
-                {/* Fri */}
-                <div className="flex justify-between items-center border-b border-[var(--color-border-color)] pb-2">
-                  <span className="font-medium text-[var(--color-text-heading)] text-sm">Friday</span>
-                  <span className="text-[var(--color-text-body)] text-sm">10:00 AM - 07:00 PM</span>
-                </div>
-                {/* Sat */}
-                <div className="flex justify-between items-center border-b border-[var(--color-border-color)] pb-2">
-                  <span className="font-medium text-[var(--color-text-heading)] text-sm">Saturday</span>
-                  <span className="text-[var(--color-text-body)] text-sm">Closed</span>
-                </div>
-                {/* Sun */}
-                <div className="flex justify-between items-center">
-                  <span className="font-medium text-[var(--color-text-heading)] text-sm">Sunday</span>
-                  <span className="text-[var(--color-text-body)] text-sm">Closed</span>
-                </div>
+              </div>
+
+              {/* Map Card */}
+              <div className="relative w-full h-[350px] md:h-[450px] rounded-3xl overflow-hidden shadow-sm border border-gray-100 dark:border-gray-800 bg-gray-200">
+                <a 
+                  href="https://maps.google.com" 
+                  target="_blank" 
+                  rel="noreferrer"
+                  className="absolute top-4 left-4 z-20 bg-white/90 backdrop-blur-md px-4 py-2 rounded-full shadow-md text-[var(--color-primary)] font-semibold flex items-center gap-2 hover:bg-white transition-colors text-sm"
+                >
+                  Open in Maps <ArrowUpRight size={16} />
+                </a>
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d387191.03608971407!2d-74.30933232776687!3d40.697539959864436!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2sin!4v1714571987556!5m2!1sen!2sin"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen=""
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="absolute inset-0"
+                ></iframe>
               </div>
             </div>
 
-            {/* Right: Form */}
-            <div className="p-6 md:p-8 lg:p-10 lg:pl-12 flex flex-col justify-center">
-              <h3 className="font-serif text-2xl font-semibold text-[var(--color-text-heading)] mb-2">Let's Talk With Us</h3>
-              <p className="text-[var(--color-text-body)] text-sm mb-6">Fill out the form — we'll get back to you shortly.</p>
+            {/* Right Column: Contact Form Card */}
+            <div className="lg:col-span-6 bg-white dark:bg-[var(--color-bg-card)] rounded-[2.5rem] p-8 md:p-10 shadow-lg border border-gray-100 dark:border-gray-800 h-full">
+              <h3 className="font-serif text-2xl font-semibold text-[var(--color-text-heading)] mb-2">Let&apos;s Talk With Us</h3>
+              
+              <form className="space-y-6" onSubmit={onSubmit}>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {/* Full Name */}
+                  <div className="space-y-2">
+                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Full Name</label>
+                    <input 
+                      type="text" 
+                      id="name" 
+                      name="name" 
+                      required 
+                      placeholder="John Doe" 
+                      className="w-full px-4 py-3.5 rounded-2xl bg-[#F8FCFF] dark:bg-[#111827] border border-gray-200 dark:border-gray-800 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent transition-all text-sm text-gray-900 dark:text-white placeholder-gray-400" 
+                    />
+                  </div>
+                  
+                  {/* Email */}
+                  <div className="space-y-2">
+                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Email Address</label>
+                    <input 
+                      type="email" 
+                      id="email" 
+                      name="email" 
+                      required 
+                      placeholder="john@example.com" 
+                      className="w-full px-4 py-3.5 rounded-2xl bg-[#F8FCFF] dark:bg-[#111827] border border-gray-200 dark:border-gray-800 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent transition-all text-sm text-gray-900 dark:text-white placeholder-gray-400" 
+                    />
+                  </div>
+                </div>
 
-              <form className="space-y-4" onSubmit={onSubmit}>
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-[var(--color-text-heading)] mb-1">Name</label>
-                  <input type="text" id="name" name="name" required placeholder="Enter Your Name" className="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-[var(--color-bg-main)] border border-gray-200 dark:border-[var(--color-border-color)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] transition-all text-sm" />
+                {/* Interested Service */}
+                <div className="space-y-2">
+                  <label htmlFor="service" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Interested Service</label>
+                  <input 
+                    type="text" 
+                    id="service" 
+                    name="service" 
+                    placeholder="e.g., Cosmetic Dentistry, Implants" 
+                    className="w-full px-4 py-3.5 rounded-2xl bg-[#F8FCFF] dark:bg-[#111827] border border-gray-200 dark:border-gray-800 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent transition-all text-sm text-gray-900 dark:text-white placeholder-gray-400" 
+                  />
                 </div>
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-[var(--color-text-heading)] mb-1">Email</label>
-                  <input type="email" id="email" name="email" required placeholder="Enter Your Email" className="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-[var(--color-bg-main)] border border-gray-200 dark:border-[var(--color-border-color)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] transition-all text-sm" />
+
+                {/* Message */}
+                <div className="space-y-2">
+                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Your Message</label>
+                  <textarea 
+                    id="message" 
+                    name="message" 
+                    rows="4" 
+                    required 
+                    placeholder="Tell us about your dental needs..." 
+                    className="w-full px-4 py-3.5 rounded-2xl bg-[#F8FCFF] dark:bg-[#111827] border border-gray-200 dark:border-gray-800 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent transition-all resize-none text-sm text-gray-900 dark:text-white placeholder-gray-400"
+                  ></textarea>
                 </div>
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-[var(--color-text-heading)] mb-1">Message</label>
-                  <textarea id="message" name="message" rows="3" required placeholder="Enter a description.." className="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-[var(--color-bg-main)] border border-gray-200 dark:border-[var(--color-border-color)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] transition-all resize-none text-sm"></textarea>
-                </div>
-                <button type="submit" disabled={loading} className="px-6 py-3 bg-[#1E293B] text-white rounded-full font-medium hover:bg-black transition-colors w-max shadow-md hover:shadow-lg text-sm mt-2">
+
+                {/* Submit Button */}
+                <button 
+                  type="submit" 
+                  disabled={loading} 
+                  className="w-full py-4 bg-[var(--color-primary)] text-white rounded-full font-semibold hover:bg-[var(--color-primary-hover)] transition-all flex items-center justify-center gap-2 group shadow-lg hover:shadow-[var(--color-primary)]/30 mt-4 disabled:opacity-70 disabled:cursor-not-allowed"
+                >
                   {loading ? "Sending..." : "Send Message"}
+                  {!loading && <ArrowUpRight size={18} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />}
                 </button>
+                
                 {result && (
-                  <p className="mt-4 text-sm font-medium text-[var(--color-primary)]">
+                  <p className="text-center text-sm font-medium text-[var(--color-primary)] mt-4">
                     {result}
                   </p>
                 )}
               </form>
+
+              {/* Support Status Widget */}
+              <div className="mt-8 pt-8 border-t border-gray-100 dark:border-gray-800 flex flex-wrap sm:flex-nowrap items-end justify-between gap-4">
+                
+                {/* Left: Typing Message */}
+                <div className="flex-1">
+                  <h4 className="text-[11px] font-bold text-[var(--color-primary)] dark:text-[var(--color-primary)] tracking-[0.15em] uppercase mb-2 ml-1">Clinic Support</h4>
+                  <TypingMessage />
+                </div>
+                
+                {/* Right: Available Badge */}
+                <div className="shrink-0 self-end">
+                  <div className="flex items-center justify-center gap-2 px-3.5 py-1.5 bg-white dark:bg-[#111827] border border-gray-200 dark:border-gray-800 rounded-lg shadow-sm">
+                    <div className="w-1.5 h-1.5 rounded-full bg-[var(--color-primary)]"></div>
+                    <span className="text-[11px] font-bold text-gray-900 dark:text-white tracking-widest">AVAILABLE</span>
+                  </div>
+                </div>
+              </div>
+
             </div>
 
           </div>
         </div>
-      </section>
-
-      {/* 3. Google Maps */}
-      <section className="h-[450px] w-full relative">
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d387191.03608971407!2d-74.30933232776687!3d40.697539959864436!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2sin!4v1714571987556!5m2!1sen!2sin"
-          width="100%"
-          height="100%"
-          style={{ border: 0 }}
-          allowFullScreen=""
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-          className="grayscale dark:opacity-70 dark:invert contrast-125"
-        ></iframe>
       </section>
 
     </div>
