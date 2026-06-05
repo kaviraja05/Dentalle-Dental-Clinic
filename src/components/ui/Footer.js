@@ -36,7 +36,7 @@ export default function Footer() {
                 DENTELLE
               </span>
             </Link>
-            <p className="text-[#6B7280] dark:text-gray-400 text-[13px] leading-[1.8] max-w-[280px]">
+            <p className="text-[#6B7280] dark:text-gray-400 text-[14px] leading-[1.8] max-w-[280px]">
               Advanced dental care with modern technology and compassionate treatment. Your smile is our priority.
             </p>
             <div className="flex space-x-4 pt-2">
@@ -59,11 +59,11 @@ export default function Footer() {
           <div className="md:col-span-4 lg:col-span-2">
             <h4 className="font-serif text-[17px] text-[#0B1220] dark:text-white mb-6">Quick Links</h4>
             <ul className="space-y-4">
-              <li><Link href="/" className="text-[#6B7280] dark:text-gray-400 hover:text-[var(--color-primary)] text-[13px]">Home</Link></li>
-              <li><Link href="/about" className="text-[#6B7280] dark:text-gray-400 hover:text-[var(--color-primary)] text-[13px]">About Us</Link></li>
-              <li><Link href="/services" className="text-[#6B7280] dark:text-gray-400 hover:text-[var(--color-primary)] text-[13px]">Services</Link></li>
-              <li><Link href="/clinic" className="text-[#6B7280] dark:text-gray-400 hover:text-[var(--color-primary)] text-[13px]">Gallery</Link></li>
-              <li><Link href="/contact" className="text-[#6B7280] dark:text-gray-400 hover:text-[var(--color-primary)] text-[13px]">Contact</Link></li>
+              <li><Link href="/" className="text-[#6B7280] dark:text-gray-400 hover:text-[var(--color-primary)] text-[14px]">Home</Link></li>
+              <li><Link href="/about" className="text-[#6B7280] dark:text-gray-400 hover:text-[var(--color-primary)] text-[14px]">About Us</Link></li>
+              <li><Link href="/services" className="text-[#6B7280] dark:text-gray-400 hover:text-[var(--color-primary)] text-[14px]">Services</Link></li>
+              <li><Link href="/clinic" className="text-[#6B7280] dark:text-gray-400 hover:text-[var(--color-primary)] text-[14px]">Gallery</Link></li>
+              <li><Link href="/contact" className="text-[#6B7280] dark:text-gray-400 hover:text-[var(--color-primary)] text-[14px]">Contact</Link></li>
             </ul>
           </div>
 
@@ -71,11 +71,11 @@ export default function Footer() {
           <div className="md:col-span-4 lg:col-span-3">
             <h4 className="font-serif text-[17px] text-[#0B1220] dark:text-white mb-6">Our Services</h4>
             <ul className="space-y-4">
-              <li><Link href="/services" className="text-[#6B7280] dark:text-gray-400 hover:text-[var(--color-primary)] text-[13px]">Teeth Whitening</Link></li>
-              <li><Link href="/services" className="text-[#6B7280] dark:text-gray-400 hover:text-[var(--color-primary)] text-[13px]">Dental Implants</Link></li>
-              <li><Link href="/services" className="text-[#6B7280] dark:text-gray-400 hover:text-[var(--color-primary)] text-[13px]">Braces &amp; Aligners</Link></li>
-              <li><Link href="/services" className="text-[#6B7280] dark:text-gray-400 hover:text-[var(--color-primary)] text-[13px]">Cosmetic Dentistry</Link></li>
-              <li><Link href="/services" className="text-[#6B7280] dark:text-gray-400 hover:text-[var(--color-primary)] text-[13px]">Emergency Care</Link></li>
+              <li><Link href="/services" className="text-[#6B7280] dark:text-gray-400 hover:text-[var(--color-primary)] text-[14px]">Teeth Whitening</Link></li>
+              <li><Link href="/services" className="text-[#6B7280] dark:text-gray-400 hover:text-[var(--color-primary)] text-[14px]">Dental Implants</Link></li>
+              <li><Link href="/services" className="text-[#6B7280] dark:text-gray-400 hover:text-[var(--color-primary)] text-[14px]">Braces &amp; Aligners</Link></li>
+              <li><Link href="/services" className="text-[#6B7280] dark:text-gray-400 hover:text-[var(--color-primary)] text-[14px]">Cosmetic Dentistry</Link></li>
+              <li><Link href="/services" className="text-[#6B7280] dark:text-gray-400 hover:text-[var(--color-primary)] text-[14px]">Emergency Care</Link></li>
             </ul>
           </div>
 
@@ -85,17 +85,17 @@ export default function Footer() {
             <ul className="space-y-5">
               <li className="flex items-start gap-3">
                 <MapPin size={16} strokeWidth={1.5} className="text-[#4FA8F6] shrink-0 mt-0.5" />
-                <span className="text-[#6B7280] dark:text-gray-400 text-[13px] leading-relaxed">
-                  Dentelle Towers, Chennai, Tamil Nadu,<br /> 631 500
+                <span className="text-[#6B7280] dark:text-gray-400 text-[14px] leading-relaxed">
+                  Church Road, Kelambakkam, Chennai, Tamil Nadu, 603101
                 </span>
               </li>
               <li className="flex items-center gap-3">
                 <Phone size={16} strokeWidth={1.5} className="text-[#4FA8F6] shrink-0" />
-                <span className="text-[#6B7280] dark:text-gray-400 text-[13px]">+1 (555) 123-4567</span>
+                <span className="text-[#6B7280] dark:text-gray-400 text-[14px]">+91 95744 68870</span>
               </li>
               <li className="flex items-center gap-3">
                 <Mail size={16} strokeWidth={1.5} className="text-[#4FA8F6] shrink-0" />
-                <span className="text-[#6B7280] dark:text-gray-400 text-[13px]">hello@dentelle.com</span>
+                <span className="text-[#6B7280] dark:text-gray-400 text-[14px]">hello@dentelle.com</span>
               </li>
             </ul>
           </div>

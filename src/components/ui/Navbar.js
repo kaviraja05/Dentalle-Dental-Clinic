@@ -13,7 +13,7 @@ const links = [
   { name: "About us", href: "/about" },
   { name: "Services", href: "/services" },
   { name: "Gallery", href: "/clinic" },
-  { name: "Contact us", href: "/contact" },
+  { name: "Contact", href: "/contact" },
 ];
 
 export default function Navbar() {

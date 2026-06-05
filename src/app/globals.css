@@ -114,17 +114,17 @@ h6 {
 }
 
 .animate-border-x {
-  animation: border-x 2s linear infinite;
+  animation: border-x 3s linear infinite;
 }
 
 .animate-border-x-reverse {
-  animation: border-x-reverse 2s linear infinite;
+  animation: border-x-reverse 3s linear infinite;
 }
 
 .animate-border-y {
-  animation: border-y 2s linear infinite;
+  animation: border-y 3s linear infinite;
 }
 
 .animate-border-y-reverse {
-  animation: border-y-reverse 2s linear infinite;
+  animation: border-y-reverse 3s linear infinite;
 }
